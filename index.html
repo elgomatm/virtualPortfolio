@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container"></div>
+  <div class="loading-screen">
+    <h1>Loading Your 3D Portfolio</h1>
+    <div class="progress-bar-container">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+  
+  <div class="info-panel">
+    <button class="close-button">✕</button>
+    <div class="info-content"></div>
+  </div>
+  
+  <div class="controls-hint">
+    Use WASD to move, mouse to look around
+  </div>
+  
+  <div class="top-nav">
+    <div class="name">Your Name</div>
+    <div class="links">
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- Use module import instead of CDN links -->
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
