@@ -682,15 +682,56 @@ function onWindowResize() {
 function simulateLoading() {
   const loadingScreen = document.querySelector('.loading-screen');
   const progressBar = document.querySelector('.progress-bar');
+  const loadingPercentage = document.querySelector('.loading-percentage');
   
   // Simulate loading progress
   let progress = 0;
+  
+  // Create array of loading messages
+  const loadingMessages = [
+    "Initializing 3D environment...",
+    "Creating desert landscape...",
+    "Placing interactive objects...",
+    "Setting up lighting...",
+    "Preparing portfolio data...",
+    "Almost ready..."
+  ];
+  
+  const loadingSubtitle = document.querySelector('.loading-subtitle');
+  let messageIndex = 0;
+  
   const interval = setInterval(() => {
-    progress += Math.random() * 10;
+    // Smooth progress increment
+    const increment = Math.min(Math.random() * 10, 100 - progress);
+    progress += increment;
+    
+    // Update progress bar and percentage
+    progressBar.style.width = `${progress}%`;
+    loadingPercentage.textContent = `${Math.round(progress)}%`;
+    
+    // Change loading message at certain progress points
+    const newMessageIndex = Math.floor(progress / (100 / loadingMessages.length));
+    if (newMessageIndex !== messageIndex && newMessageIndex < loadingMessages.length) {
+      messageIndex = newMessageIndex;
+      
+      // Fade out, change text, fade in
+      loadingSubtitle.style.opacity = 0;
+      setTimeout(() => {
+        loadingSubtitle.textContent = loadingMessages[messageIndex];
+        loadingSubtitle.style.opacity = 1;
+      }, 300);
+    }
     
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
+      
+      // Final message
+      loadingSubtitle.style.opacity = 0;
+      setTimeout(() => {
+        loadingSubtitle.textContent = "Welcome to the experience!";
+        loadingSubtitle.style.opacity = 1;
+      }, 300);
       
       // Hide loading screen
       setTimeout(() => {
@@ -698,9 +739,7 @@ function simulateLoading() {
         setTimeout(() => {
           loadingScreen.style.display = 'none';
         }, 1000);
-      }, 500);
+      }, 1000);
     }
-    
-    progressBar.style.width = `${progress}%`;
   }, 200);
 }
